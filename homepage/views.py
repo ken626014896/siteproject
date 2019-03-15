@@ -22,7 +22,7 @@ def index(request):
     #
     post_list= Post.objects.all().order_by('-pk')
     sort_list=Category.objects.all()
-
+    
     return render(request, 'homepage/index.html', {"post_list": post_list,
                                                    'sort_list':sort_list})
 def index2(request):
