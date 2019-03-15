@@ -1,0 +1,111 @@
+<!doctype html>
+
+{% load staticfiles %}
+{% load homepage_tag %}
+<html>
+<head>
+
+<title>公众号信息聚合</title>
+<meta name="referrer" content="never">
+<meta charset="UTF-8">
+<meta name="keywords" content="公众号信息聚合" />
+<meta name="description" content="公众号信息聚合" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'homepage/css/base.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/index.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/m.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/shutter.css' %}" rel="stylesheet">
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href="{% static 'homepage/css/style.css' %}" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/css/htmleaf-demo.css' %}"><!--演示页面样式，使用时可以不引用-->
+<link rel="stylesheet" href="{% static 'homepage/css/main.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Hind:400,600|Open+Sans:300,600" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'homepage/css/sortable.min.css' %}">
+<script src="{% static 'homepage/js/sortable.min.js' %}"></script>
+<!--[if lt IE 9]>
+<script src="{% static 'homepage/js/modernizr.js' %}"></script>
+<![endif]-->
+
+</head>
+<body>
+<header>
+  <div class="tophead">
+    <div class="logo"><a href="/">推送与更新</a></div>
+
+    <nav class="topnav" id="topnav">
+      <ul>
+        <li></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="search d1" >
+		<form action="{% url 'search' %}" method="post" name="searchform" id="searchform">{% csrf_token %}
+		  <input name="keyboard" id="keyboard" class="input_text" type="text" placeholder="搜索从这里开始...">
+		  <button  type="submit"></button>
+		</form>
+</div>
+
+<div class="htmleaf-container">
+
+		  <main class="sortable">
+		    <div class="container">
+		      <div class="wrapper" style="padding-top: 10px">
+		        <ul class="sortable__nav nav">
+		          <li>
+		            <a data-sjslink="all" class="nav__link">
+		              Recent
+		            </a>
+		          </li>
+                     {% for sort in sort_list %}
+                          <li>
+                            <a data-sjslink="{{ sort.sort }}" class="nav__link">
+                              {{ sort.sort }}
+                            </a>
+                          </li>
+                     {% empty %}
+
+                  {% endfor %}
+
+
+		        </ul>
+		        <div id="sortable" class="sjs-default">
+                    {% for post in post_list %}
+                       <div data-sjsel="{{ post.sort }}">
+		            <div class="card" >
+		              <img class="card__picture"  src="/static/homepage/images/contentImg/{{ post.img_url }}" alt="">
+		              <div class="card-infos" >
+		                <h2 class="card__title"> <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+		                <p class="card__text">
+		                  <a href="{{ post.get_absolute_url }}">{{ post.describe }}</a>
+		                </p>
+		              </div>
+		            </div>
+		          </div>
+                  {% empty %}
+                  <div class="no-post">暂时还没有发布的文章！</div>
+                  {% endfor %}
+
+               </div>
+		      </div>
+		    </div>
+		  </main>
+
+
+	</div>
+
+
+
+<footer>
+    <p>Create by <a href="{% url  'manage'%}">xuzhaolong</a> <a href="/"></a></p>
+</footer>
+<script src="{% static 'homepage/js/nav.js' %}"></script>
+<script type="text/javascript">
+  document.querySelector('#sortable').sortablejs()
+</script>
+</body>
+</html>

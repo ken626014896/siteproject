@@ -1,0 +1,111 @@
+@charset "utf-8";
+/* CSS Document */
+
+.hdwrap {
+	width:738px;
+	border:solid #ccc 1px;
+	margin:0 auto;
+	position:relative;
+	overflow:hidden;
+}
+/*首页图片滚动*/
+
+
+.flashlist {
+	height:344px;
+	overflow:hidden;
+}
+.flashlist img{
+	width:738px; 
+	height:344px;
+	}
+.flashlist .f_out {
+	height:344px;
+	overflow:hidden;
+	position:relative;
+	z-index:100;
+}
+.flashlist .f_out .vip01pic,.jcToppic .vip01pic {
+	width:58px;
+	height:58px;
+	display:block;
+	position:absolute;
+	top:0px;
+	left:0px;
+	background:url(../images/vipico.gif) no-repeat 0 0;
+	z-index:200
+}
+.vip02pic {
+	width:39px;
+	height:39px;
+	display:block;
+	position:absolute;
+	top:0px;
+	left:0px;
+	background:url(../images/vipico.gif) no-repeat -80px 0;
+	z-index:200
+}
+.flashlist .f_out .picintro {
+	height:42px;
+	background:url(../images/Bg_03.png) repeat top;
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:698px;
+	z-index:300;
+	padding:0 20px;
+}
+.picintro h2 a {
+	color:#333;
+	font-size:16px;
+	font-weight:bold;
+	line-height:42px;
+}
+.picintro p {
+	color:#767676;
+	line-height:20px;
+}
+.picintro p a {
+	color:#abadac;
+}
+.flash_tab {
+	height:12px;
+	width:140px;
+	position:absolute;
+	right:100px;
+	bottom:12px;
+	z-index:400;
+}
+.flash_tab .tabs {
+	width:140px;
+	height:12px;
+	overflow:hidden;
+	margin:auto;
+}
+.flash_tab .tabs ul li {
+	width:28px;
+	height:12px;
+	float:left;
+	display:block;
+}
+.flash_tab .tabs ul li.opdiv,.noopdiv {
+	padding:0;
+	opacity:1
+}
+.flash_tab .tabs ul li.opdiv a {
+	width:12px;
+	height:12px;
+	background:url(../images/picNow.png) no-repeat right;
+	_background:url(../images/picNow.gif) no-repeat right;
+	display:block;
+}
+.flash_tab .tabs ul li.opdiv a:hover {
+	background-position:-8px -1239px;
+}
+.flash_tab .tabs ul li.noopdiv a {
+	width:12px;
+	height:12px;
+	background:url(../images/picNow.png) no-repeat left;
+	_background:url(../images/picNow.gif) no-repeat left;
+	display:block;
+}

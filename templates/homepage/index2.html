@@ -1,0 +1,183 @@
+<!doctype html>
+
+{% load staticfiles %}
+{% load homepage_tag %}
+<html>
+<head>
+
+<title>公众号信息聚合</title>
+<meta name="referrer" content="never">
+<meta charset="UTF-8">
+<meta name="keywords" content="公众号信息聚合" />
+<meta name="description" content="公众号信息聚合" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'homepage/css/base.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/index.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/m.css' %}" rel="stylesheet">
+{#<link href="{% static 'homepage/css/bootstrap.min.css' %}" rel="stylesheet">#}
+{##}
+{#<script src="{% static 'homepage/js/jquery-2.1.3.min.js' %}"></script>#}
+{#<script src="{% static 'homepage/js/bootstrap.min.js' %}"></script>#}
+<!--[if lt IE 9]>
+<script src="{% static 'homepage/js/modernizr.js' %}"></script>
+<![endif]-->
+<script>
+window.onload = function ()
+{
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+</script>
+</head>
+<body>
+<header>
+  <div class="tophead">
+    <div class="logo"><a href="{% url  "homepage" %}">推送与更新</a></div>
+    <div   id="mnav">
+      <h2><span class="navicon"></span></h2>
+      <ul>
+        <li><a href="{% url  "homepage" %}">网站首页</a></li>
+{#        <li><a href="about.html">类别</a></li>#}
+
+
+
+        <li><a href="share.html">关于我</a></li>
+
+      </ul>
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+        <li><a href="{% url  "homepage" %}">网站首页</a></li>
+{#        <li><a href="about.html">类别</a></li>#}
+
+        <li><a href="share.html">关于我</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+{#<div class="picshow">#}
+{##}
+{#  <ul>#}
+{#    <li><a href="{% url  'pension' %}"><i><img src="{% static 'homepage/images/b01.jpg' %}"></i>#}
+{#      <div class="font">#}
+{#        <h3>养老</h3>#}
+{#      </div>#}
+{#      </a></li>#}
+{#    <li><a href="{% url  'technology' %}"><i><img src="{% static 'homepage/images/b02.jpg' %}"></i>#}
+{#      <div class="font">#}
+{#        <h3>科技</h3>#}
+{#      </div>#}
+{#      </a></li>#}
+{#    <li><a href="{% url  'entertainment' %}"><i><img src="{% static 'homepage/images/b03.jpg' %}"></i>#}
+{#      <div class="font">#}
+{#        <h3>娱乐</h3>#}
+{#      </div>#}
+{#      </a></li>#}
+{#    <li><a href="{% url  'study' %}"><i><img src="{% static 'homepage/images/b04.jpg' %}"></i>#}
+{#      <div class="font">#}
+{#        <h3>学习</h3>#}
+{#      </div>#}
+{#      </a></li>#}
+{#    <li><a href="{% url  'military' %}"><i><img src="{% static 'homepage/images/b05.jpg' %}"></i>#}
+{#      <div class="font">#}
+{#        <h3>军事</h3>#}
+{#      </div>#}
+{#      </a></li>#}
+{#  </ul>#}
+{#</div>#}
+<article>
+  <div class="blogs">
+      {% for post in post_list %}
+          <li> <span class="blogpic"><a href="{{ post.get_absolute_url }}"><img src="/static/homepage/images/contentImg/{{ post.img_url }}" ></a></span>
+              <h3 class="blogtitle"><a href="{{ post.get_absolute_url }}">{{ post.title}}</a></h3>
+              <div class="bloginfo">
+                  <br>
+                  <br>
+              <p>{{ post.describe }}</p>
+              </div>
+              <div class="autor"><span class="dtime">{{ post.publish_time }}</span><span class="viewnum">{{ post.come_from }}</span><span class="readmore"><a href="{{ post.get_absolute_url }}">阅读原文</a></span></div>
+          </li>
+      {% empty %}
+      <div class="no-post">暂时还没有发布的文章！</div>
+      {% endfor %}
+
+
+  </div>
+  <div class="sidebar">
+    <div class="about">
+      <div class="avatar"> <img src="{% static 'homepage/images/author.jpg' %}" alt=""> </div>
+      <p class="abname">徐兆龙</p>
+      <p class="abposition">python学习生</p>
+      <div class="abtext"> 正在努力中。。</div>
+    </div>
+    <div class="search">
+      <form action="search/" method="post" name="searchform" id="searchform">{% csrf_token %}
+        <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+        <input name="show" value="title" type="hidden">
+        <input name="tempid" value="1" type="hidden">
+        <input name="tbname" value="news" type="hidden">
+        <input name="Submit" class="input_submit" value="搜索" type="submit">
+      </form>
+    </div>
+    <div class="cloud">
+      <h2 class="hometitle">标签云</h2>
+        {% get_sort as sort_list %}
+
+      <ul>
+{#        <a href="/">{{ sort.sort }}</a>#}
+{#              <a href="/">陌上花开</a> <a href="/">校园生活</a> <a href="/">html5</a> <a href="/">SumSung</a> <a href="/">青春</a> <a href="/">温暖</a> <a href="/">阳光</a> <a href="/">三星</a><a href="/">索尼</a> <a href="/">华维荣耀</a> <a href="/">三星</a> <a href="/">索尼</a>#}
+            {% for sort in sort_list %}
+                <a href="{{ sort.get_sort_url}}">{{ sort.sort }}  </a>
+
+            {% empty %}
+              <div class="no-post">暂时还没有标签！</div>
+            {% endfor %}
+      </ul>
+
+
+    </div>
+
+    <div class="paihang">
+      <h2 class="hometitle">推荐</h2>
+        {% get_recommen as recommen_list %}
+
+      <ul>
+           {% for recommen in recommen_list %}
+        <li><b><a href="{{recommen.get_absolute_url  }}" target="_blank">{{ recommen.title }}</a></b>
+          <p><i><img src="http://img01.store.sogou.com/net/a/04/link?appid=100520029&url={{ recommen.img_url }}"></i>{{ recommen.describe }}</p>
+        </li>
+          {% empty %}
+      <div class="no-post">暂时还没有文章！</div>
+      {% endfor %}
+      </ul>
+    </div>
+    <div class="links">
+      <h2 class="hometitle">友情链接</h2>
+      <ul>
+        <li><a href="https://weibo.com/1913281592/profile?rightmod=1&wvr=6&mod=personinfo" title="个人博客">个人博客</a></li>
+          <li><a href="https://github.com/ken626014896" title="个人博客">github</a></li>
+      </ul>
+    </div>
+    <div class="weixin">
+      <h2 class="hometitle">官方微信</h2>
+      <ul>
+        <img src="">
+      </ul>
+    </div>
+  </div>
+</article>
+<div class="blank"></div>
+<footer>
+    <p>Create by <a href="/">xuzhaolong</a> <a href="/"></a></p>
+</footer>
+<script src="{% static 'homepage/js/nav.js' %}"></script>
+
+</body>
+</html>

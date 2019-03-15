@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>东莞理工学院</title>
+<meta name="others" content="页面生成时间 2018-09-29 09:46:37" />
+<link href="{% static 'homepage/css/index_style.css' %}" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="{% static 'homepage/js/jquery-1.7.1.min.js' %}"></script>
+<!--[if lte IE 6]>
+<script language="javascript" type="text/javascript" src="/dgut/xhtml/js/png.js"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('div, ul, img, li, input , a');
+</script>
+<![endif]-->
+</head>
+
+<body class="transparent">
+<div class="homearea">
+<div class="topMini">
+<ul class="fl ulFl">
+<li class="awhite homeIcon"><a href="http://www.dgut.edu.cn/" target="_blank">网站首页</a></li>
+<li class="date">
+<marquee scrollamount=2><script language="JavaScript" src="{% static 'homepage/js/date.js' %}"></script>
+        <script language="JavaScript" src="{% static 'homepage/js/weather.js' %}"></script></marquee>
+</li>
+
+</ul>
+<ul class="fr">
+<li class=" english"><!--<font class="huang"><a href="#"  target="_blank" title='' ></a></font>--><font class="awhite"><a href="http://oa.dgut.edu.cn/"  target="_blank" title='办公信息登录' >办公信息登录</a>　|　<a href="http://www.lib.dgut.edu.cn/"  target="_blank" title='图书馆' >图书馆</a>  |　<a href="http://en.dgut.edu.cn/"  target="_blank" title='ENGLISH' >ENGLISH</a>　|　<a href="/dgut/jgdh/index_lmtt.shtml"  target="_blank" title='机构导航' >机构导航</a></font></li>
+</ul>
+<div class="cl"></div>
+</div>
+</div>
+</body>
+</html>

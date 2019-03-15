@@ -1,0 +1,193 @@
+<!doctype html>
+
+{% load staticfiles %}
+{% load homepage_tag %}
+<html>
+<head>
+
+<title>公众号信息聚合</title>
+<meta name="referrer" content="never">
+<meta charset="UTF-8">
+<meta name="keywords" content="公众号信息聚合" />
+<meta name="description" content="公众号信息聚合" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'homepage/css/base.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/index.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/m.css' %}" rel="stylesheet">
+
+<script src="{% static 'adminpage/js/edit/kindeditor-all-min.js' %}"></script>
+<script src="{% static 'adminpage/js/edit/kindeditor-all.js' %}"></script>
+<script src="{% static 'adminpage/js/edit/lang/zh-CN.js' %}"></script>
+<!--[if lt IE 9]>
+<script src="{% static 'homepage/js/modernizr.js' %}"></script>
+<![endif]-->
+<script>
+window.onload = function ()
+{
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+</script>
+</head>
+<body>
+<header>
+  <div class="tophead">
+    <div class="logo"><a href="/">推送与更新</a></div>
+    <div   id="mnav">
+      <h2><span class="navicon"></span></h2>
+      <ul >
+
+        <li><a href="{% url  "test" %}">网站首页</a></li>
+          <li><a >管理员:{{ account }}</a></li>
+         <li><a  href="{% url  "logout" %}">退出</a></li>
+
+      </ul>
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+
+        <li><a href="{% url  "test" %}">网站首页</a></li>
+          <li><a >管理员:{{ account }}</a></li>
+         <li><a  href="{% url  "logout" %}">退出</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<article>
+  <h1 class="t_nav"><span>您现在的位置是：首页 > 功能选择</span><a href="/" class="n1">网站首页</a><a href="/" class="n2">功能选择</a></h1>
+
+<div class="lmnav">
+
+
+       <div class="cloud">
+      <h2 class="hometitle">标签展示</h2>
+             {% get_sort as sort_list %}
+
+             <ul id="evrysort">
+
+            {% for sort in sort_list %}
+                <a >{{ sort.sort }}</a>
+            {% empty %}
+              <div class="no-post">暂时还没有标签！</div>
+            {% endfor %}
+             </ul>
+    </div>
+
+
+      </div>
+
+ </div>
+
+
+{#    <div class="sidebar">#}
+
+              <div class="lmnav">
+
+              <h2 class="hometitle">添加标签</h2>
+               <div class="search">
+
+                    <input name="cloudname" id="cloudname" class="input_text" value="" style="color: rgb(153, 153, 153);"  type="text">
+
+                    <input name="cloudbtn"   id="addcloudid" class="input_submit" value="添加"  type="button">
+
+
+
+              </div>
+
+              </div>
+
+
+
+       <div class="lmnav">
+
+      <h2 class="hometitle"> 添加公众号</h2>
+       <div class="search">
+      <form action="/function/seachgzh/" method="post" name="addgzhform" id="addgzhform">{% csrf_token %}
+    <input name="gzhname" id="gzhname" class="input_text" value="" style="color: rgb(153, 153, 153);"  type="text">
+
+    <input name="Submit" class="input_submit" value="搜索" type="submit">
+     </form>
+
+
+      </div>
+
+ </div>
+
+<div class="lmnav">
+
+      <h2 class="hometitle" > 增加文章</h2>
+       <div class="search" >
+
+
+           <a href="{% url 'addcontent' %}" name="Submit" class="input_submit" value="增加" style="text-align: center">增加</a>
+
+
+
+      </div>
+
+ </div>
+{#    </div>#}
+
+
+
+
+</article>
+<footer>
+    <p>Create by <a >xuzhaolong</a> <a href="/"></a></p>
+</footer>
+<script type="text/javascript" src="{% static 'adminpage/js/jquery-1.11.3.min.js' %}"></script>
+
+<script>
+
+$('document').ready(function(){
+
+  $("#addcloudid").click(function(){
+
+
+    $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});
+
+
+        {#要添加入库和要爬取信息的公众号#}
+        var sort=$('#cloudname').val()
+        var btnthis=$(this)
+
+        {#var statu = confirm("你确定要添加类别:"+sort+'？');#}
+        {#if(!statu){#}
+        {#   return false;#}
+        {#    }#}
+
+            $.ajax({
+            url:'/function/',
+            type:'POST',
+            data:{sort:sort},
+            success:function(hint){
+                if(hint=='hasother'){
+                    alert("添加失败，只能输入中文" )
+                }
+                else if(hint=='ok'){
+                     $('#evrysort').append(' <a>'+sort+'</a>')
+
+                }
+                else {
+
+                    alert("添加失败，已经存在" )
+                }
+
+            }
+        })
+
+  });
+
+});
+
+</script>
+
+
+</body>
+</html>

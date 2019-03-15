@@ -1,0 +1,284 @@
+<!doctype html>
+
+{% load staticfiles %}
+{% load homepage_tag %}
+<html>
+<head>
+
+<title>公众号信息聚合</title>
+<meta name="referrer" content="never">
+<meta charset="UTF-8">
+<meta name="keywords" content="公众号信息聚合" />
+<meta name="description" content="公众号信息聚合" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link href="{% static 'adminpage/amazeui/css/amazeui.min.css'%}" rel="stylesheet">
+<link href="{% static 'homepage/css/base.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/index.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/m.css' %}" rel="stylesheet">
+
+
+
+
+
+
+<!--[if lt IE 9]>
+<script src="{% static 'homepage/js/modernizr.js' %}"></script>
+<![endif]-->
+<style type="text/css">
+        .toolbar {
+            border: 1px solid #ccc;
+        }
+        .aabb {
+
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<header>
+  <div class="tophead">
+    <div class="logo"><a href="/">推送与更新</a></div>
+    <div   id="mnav">
+      <h2><span class="navicon"></span></h2>
+      <ul >
+
+        <li><a href="{% url  "test" %}">网站首页</a></li>
+          <li><a >管理员:{{ account }}</a></li>
+         <li><a  href="{% url  "logout" %}">退出</a></li>
+
+      </ul>
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+
+        <li><a href="{% url  "test" %}">网站首页</a></li>
+          <li><a >管理员:{{ account }}</a></li>
+         <li><a  href="{% url  "logout" %}">退出</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<article>
+  <h1 class="t_nav"><span>您现在的位置是：首页 > 发布文章</span><a href="/" class="n1">网站首页</a><a href="/" class="n2">发布文章</a></h1>
+
+    <div class="infos">
+
+   <form class="am-form am-form-horizontal" style="margin-left: 8px;margin-right: 8px">
+
+        <h3 class="news_title">发表文章</h3> {% csrf_token %}
+    <div  style="width: 100%;height: 33px" >
+     <div class="am-form-group am-form-file"   style="float: left">
+      <button type="button" class="am-btn am-btn-danger am-btn-sm">
+        <i class="am-icon-cloud-upload"></i> 上传推送的封面</button>
+      <input id="frontcover" name="frontcover" type="file" multiple>
+    </div>
+    <div id="file-list"  style="float: left;margin-left: 20px;"></div>
+    </div>
+
+  <div class="am-form-group">
+
+    <div class="col-sm-10">
+      <input type="text" id='title' placeholder="标题">
+    </div>
+  </div>
+          <div class="am-form-group">
+
+    <div class="col-sm-10">
+      <input type="text" id="describe" placeholder="简介">
+    </div>
+  </div>
+
+
+
+</form>
+   <form action="" class="am-form am-form-inline" style="margin-left: 8px">
+
+
+       <div class="am-form-group am-form-icon">
+    <i class="am-icon-user"></i>
+    <input type="text"  id='author' class="am-form-field" placeholder="作者">
+
+  </div>
+  <div class="am-form-group am-form-icon">
+    <i class="am-icon-calendar"></i>
+
+      <input id='publish_time' type="date"  class="am-form-field" placeholder="日期" />
+  </div>
+
+       <div class="am-form-group am-form-icon">
+    <i class="am-icon-book"></i>
+
+      <input id='come_from' type="text"  class="am-form-field" placeholder="来自" />
+  </div>
+
+
+  </form>
+    <form action="" class="am-form am-form-inline" style="margin-left: 8px;margin-right: 8px;margin-top: 8px">
+
+     <form  id="sort">
+                     {% for category in categorys %}
+                         <a target="_blank">
+                             {{ category.sort }}<input type="radio" name="sort" value={{ category.sort }} />
+                         </a> &nbsp;
+                     {% empty %}
+
+                     {% endfor %}
+                     </form>
+
+  </form>
+
+     <div id="editor" style="margin-left: 8px;margin-right: 8px;margin-top: 8px">
+
+            <p>输入要发表的内容</p>
+        </div>
+    <button type="button" name='btn' id="btn3" class="am-btn am-btn-primary" style="margin-left: 8px;margin-bottom: 8px;margin-top: 8px">提交</button>
+        <button type="button" name='btn' id="btn2" class="am-btn am-btn-primary" style="margin-left: 8px;margin-bottom: 8px;margin-top: 8px">分类</button>
+    </div>
+
+
+
+
+
+  <div class="sidebar">
+
+   <div class="cloud">
+      <h2 class="hometitle">标签云</h2>
+        {% get_sort as sort_list %}
+
+     <ul>
+
+            {% for sort in sort_list %}
+                <a href="{{ sort.get_sort_url}}">{{ sort.sort }}</a>
+            {% empty %}
+              <div class="no-post">暂时还没有标签！</div>
+            {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</article>
+<footer>
+    <p>Create by <a >xuzhaolong</a> <a href="/"></a></p>
+</footer>
+<script type="text/javascript" src="{% static 'adminpage/js/jquery-1.11.3.min.js' %}"></script>
+
+ <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+<script type="text/javascript" src="{% static 'adminpage/js/wangEditor.js' %}"></script>
+<script type="text/javascript">
+        $(document).ready(function(){
+        var E = window.wangEditor;
+        var editor = new E('#editor');
+        editor.customConfig.uploadFileName = 'myFile';
+        var csrf2 = $("input[name='csrfmiddlewaretoken']").val();
+          editor.customConfig.uploadImgParams = {
+
+             csrfmiddlewaretoken: csrf2
+        };
+
+        editor.customConfig.uploadImgServer = '{% url 'uploadimg' %}';
+        // 或者 var editor = new E( document.getElementById('editor') )
+
+        editor.create();
+
+
+
+
+
+       $("#btn1").click(function(){
+            alert(editor.txt.html());
+
+  });
+        $("#btn2").click(function(){
+            var val=$('input:radio[name="sort"]:checked').val();
+             var describe=$('#describe').val();
+             var contents=editor.txt.html();
+
+            console.log(contents)
+  });
+        $("#btn3").click(function(){
+            {#$.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});#}
+
+
+            var fileobj = $("#frontcover")[0].files[0];
+
+            var title=$('#title').val();
+            var author=$('#author').val();
+            var publish_time=$('#publish_time').val();
+            var come_from=$('#come_from').val();
+            var describe=$('#describe').val();
+            var sort = $('input:radio[name="sort"]:checked').val();
+
+            var contents=editor.txt.html();
+            if ( fileobj==null||sort==null || title==''|| author==''|| come_from==''|| describe==''
+            ){
+
+                alert('请完善');
+            }
+            else {
+                 var csrf = $("input[name='csrfmiddlewaretoken']").val();
+                 var formData = new FormData();
+
+                 formData.append('fengmian',fileobj);
+                 formData.append('sort', sort);
+                 formData.append('title', title);
+                 formData.append('author', author);
+                 formData.append('come_from', come_from);
+                 formData.append('describe', describe);
+                 formData.append('contents', contents);
+                  formData.append('publish_time', publish_time);
+                 {#使用formdata作为数据提交时,要添加一个跨站请求伪造码#}
+                 formData.append('csrfmiddlewaretoken',csrf);
+
+                {#通过post方式发表文章#}
+                var statu = confirm("你确定要发表文章?");
+                        if(!statu){
+                           return false;
+                            }
+
+                $.ajax({
+                    url:'/function/addcontent/',
+                    type:'POST',
+                    data: formData,
+                    dataType:'json',
+                    contentType: false, // 注意这里应设为false
+                    processData: false,
+                    cache: false,
+                    success:function(hint){
+
+                              window.location.href='http://127.0.0.1:8000';
+                          },
+                    error:function (data) {
+                          console.log(data)
+                    }
+                })
+
+            }
+
+  });
+        {#自动加载时间#}
+
+                 var mydate = new Date();
+                 var t=mydate.toLocaleDateString();
+                 var today=t.replace(/\//g,'-');
+                 $('#publish_time').val(today)
+
+
+              {#上传图片组件的样式#}
+             $('#frontcover').on('change', function() {
+                  var fileNames = '';
+                  $.each(this.files, function() {
+                    fileNames += '<span class="am-badge">' + this.name + '</span> ';
+                  });
+                  $('#file-list').html(fileNames);
+                });
+         });
+
+
+
+</script>
+
+
+</body>
+</html>

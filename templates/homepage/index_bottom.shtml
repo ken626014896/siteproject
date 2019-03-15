@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>东莞理工学院</title>
+<meta name="others" content="页面生成时间 2018-09-29 09:46:37" />
+<link href="/dgut/xhtml/css/index_style.css" rel="stylesheet" type="text/css" /> 
+<script language="javascript" type="text/javascript" src="/dgut/xhtml/js/jquery-1.7.1.min.js"></script>
+</head>
+
+<body class="transparent">
+<div class="btmBg">
+	<div class="fl"><img src="/dgut/xhtml/images/btmBg1.jpg" alt="" /></div>
+    <div class="fl btmCopy">
+    	<p>
+        	                   <a href="/dgut/wzdh/index_map.shtml"  target="_blank" title='网站导航' >网站导航</a>&nbsp;|
+                   <a href="/dgut/wstp/index_wztt.shtml"  target="_blank" title='网上投票' >网上投票</a>&nbsp;|
+                   <a href="/dgut/lxwm/index_wztt.shtml"  target="_blank" title='联系我们' >联系我们</a>&nbsp;|
+                   <a href="http://m.dgut.edu.cn/"  target="_blank" title='手机版' >手机版</a>
+ | <a href="http://en.dgut.edu.cn/"  target="_blank" title='ENGLISH' >ENGLISH</a>
+        </p>
+        <p>
+
+                东莞理工学院 Copyright©2013 Dongguan University Of Technology All Rights Reserved. 粤ICP备05008829号
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ffcd3f29829bfdc12ba287dfca6fef587' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script src=" http://hm.baidu.com/h.js?fcd3f29829bfdc12ba287dfca6fef587" type="text/javascript"></script>
+<a href="http://tongji.baidu.com/hm-web/welcome/ico?s=fcd3f29829bfdc12ba287dfca6fef587" target="_blank"><img border="0" src="/cmsresources/cc/fa/17f12d9c4759a1d4907363324f6a_1.0.gif" width="20" height="20"></a>
+<span class="img1"><a target="_blank" href="http://210.76.65.188/webrecord/innernet/Welcome.jsp?bano=4419003012889"><img border="0" src="/cmsresources/42/14/3ba2a4ea4b2992ef9d0bdca0aa13_1.0.gif" style=""></a></span><span class="img2"><a target="_blank" href="http://210.76.65.188/newwebsite/index.htm"><img border="0" src="/cmsresources/f5/e8/00782d624704afab46a29d224430_1.0.gif" style=""></a></span><span class="img3">
+<script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript   src='http://dcs.conac.cn/js/20/304/0000/45001521/CA203040000450015210001.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<span id="_ideConac"><a href="//bszs.conac.cn/sitename?method=show&amp;id=0B2A7183B22B65D2E053012819ACF0FA" target="_blank"><img id="imgConac" vspace="0" hspace="0" border="0" src="//dcs.conac.cn/image/blue.png" data-bd-imgshare-binded="1"></a></span>
+<script src="http://dcs.conac.cn/js/20/304/0000/45001521/CA203040000450015210001.js" type="text/javascript"></script>
+</span>
+
+        </p>
+    </div>
+    <div class="fr"><img src="/dgut/xhtml/images/btmBg3.jpg" alt="" /></div>
+    <div class="cl"></div>
+</div>
+<script type="text/javascript">
+	var url = window.parent.location.href;
+	$.ajax({
+		url: "/sofprodglg/otherproject/jsq/info_count.jsp",
+		type: "POST",
+		async: false,
+		data: {
+			"url": url
+		},//encodeURI(
+		dataType: "json",
+		success: function(data){
+			hits = window.parent.document.getElementById('hits');
+			if (hits!=null)
+				hits.innerHTML=data.JS;
+			//alert("js"+data.JS);
+		},
+		error: function(err){
+				//alert(err);
+		}
+	});
+</script>
+</body>
+</html>

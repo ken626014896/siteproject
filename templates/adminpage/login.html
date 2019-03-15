@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html >
+{% load staticfiles %}
+<head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>网站认证系统</title>
+    <meta name="keywords" content="网站认证系统">
+    <meta name="description" content="网站认证系统">
+    <link rel="icon" herf="/static/home/pc/assets/favicon.ico" />
+    <link rel="stylesheet" href="{% static 'adminpage/css/normailze.css' %}" />
+    <link rel="stylesheet" href="{% static 'adminpage/css/modal.css' %}" />
+    <link rel="stylesheet" href="{% static 'adminpage/css/LoginPage.css' %}" />
+
+    <script type="text/javascript" src="{% static 'adminpage/js/font_350887_26wmq3zxisdlhaor.js' %}"></script>
+
+    <!--[if IE 9]>
+      <link rel="stylesheet" href="/static/home/pc/css/CasPage-IE9.css" />
+    <![endif]-->
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="/static/home/pc/css/CasPage-IE.css" />
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <style>
+          .iconHelp,
+          .weiXinLogin {
+            margin-top: -20px;
+          }
+          .contentLoginText {
+            padding-top: 50px;
+          }
+          .weiXinLogin {
+              margin-top: 0;
+          }
+          .otherMethod {
+              padding-bottom: 30px;
+          }
+        </style>
+    <![endif]-->
+</head>
+<body  style="background-color: #494a5f">
+   <div id="HelpPage" class="HelpPage loginPage">
+      <div class="HelpPageContent">
+          <!--[if (gte IE 9)|(!IE)]> -->
+          <a href="" class="logoStyle">
+
+
+{#              <div class="logoHr"></div>#}
+{#              <svg class="icon2" aria-hidden="true">#}
+{#                  <use xlink:href="#icon-zhongyangrenzhengxitong"></use>#}
+{#              </svg>#}
+          </a>
+          <!-- <![endif]-->
+          <!--[if lte IE 8]>
+            <a class="logoStyleImage" href="/home/Oauth/getToken.html?appid=self&state="><img src="/static/home/pc/assets/logo_20178182.png" alt="东莞理工学院——中央认证系统"/></a>
+          <![endif]-->
+        <div class="contentShow">
+          <div class="titleHelp">
+
+                            <span id="titleLogin" class="centerTitle" style="margin: auto;position: absolute;left: 50%;transform: translate(-50%, 0);">欢迎管理员登录</span>
+                            <a id="require"  target="_blank">
+                  <img class="iconHelp pullRight" alt="require" src="/static/adminpage/images/require.png" />
+              </a>
+              <a id="requireHover" style="display: none"  target="_blank">
+                <img class="iconHelp pullRight" alt="require" src="/static/adminpage/images/requireHover.png" />
+              </a>
+                            <a  class="wl-icon-wrp" id="safe-btn">
+                  <svg class="wl-icon" aria-hidden="true">
+                      <use xlink:href="#icon-anquan"></use>
+                  </svg>
+              </a>
+                        </div>
+          <div class="clearfix contentLoginText" >
+            <div class="remarkText"><img class="iconRemark" alt="remark" src="/static/adminpage/images/remark.png" />
+              <span id="remarkTextSpan">。。。。</span>
+              <marquee scrollamount="3" id="remarkTextMarquee" style="display: none">。。。</marquee>
+              <span class="pullRight changePassText"><img class="iconRemark" alt="remark" src="/static/adminpage/images/remark.png" /></span>
+            </div>
+              <form autocomplete="on"  action="/manage/" method="post" name="loginform" id="loginform">{% csrf_token %}
+                <div>
+                  <div>
+                    <input id="account" type="text" name="account" autocomplete="on" placeholder="请输入中央认证账号"/>
+                  </div>
+                  <div>
+                    <input id="password" class="secondInputBottom8" type="password" name="password" autocomplete="on" placeholder="请输入中央认证密码"/>
+                  </div>
+
+{#                      <a id='securitySettingTitle' style="border-right: 0;padding: 0;padding-left:10px;" href="/home/Oauth/getToken/appid/wechatverify/state/wechat_verify.html">安全设置</a>#}
+
+                     {% if message %}
+                  <div class="alert alert-warning">{{ message }}</div>
+              {% endif %}
+                  <div class="textAlign">
+
+                       <button type="submit"  id="loginBtn" class="loginSubmit" style="margin: 30px auto 20px" >登录</button>
+
+                  </div>
+                </div>
+
+            </form>
+        </div>
+          <div class="loginRemind">
+            <p id="loginRemindTitle">特别提醒</p>
+            <div id="loginRemind">
+                <p>1. 请注意这里是管理员登录界面,小心泄露密码账号</p>
+            </div>
+          </div>
+          <div class="footer">Craet &copy; by xzl.</div>
+        </div>
+      </div>
+ </div>
+
+
+
+
+
+
+    <!--[if lte IE 8]>
+        <script type="text/javascript">
+          var clientHeight = document.documentElement.clientHeight;
+          document.getElementById('HelpPage').style.height = clientHeight + "px";
+        </script>
+    <![endif]-->
+    <script type="text/javascript" src="{% static 'adminpage/js/jquery-1.11.3.min.js' %}"></script>
+    <!--<script type="text/javascript" src="/static/home/pc/js/jquery.placeholder.js"></script>-->
+    <script type="text/javascript" src="{% static 'adminpage/js/chaLang.js' %}"></script>
+    <script type="text/javascript" src="{% static 'adminpage/js/font_721037_v1xe83p5fe.js' %}"></script>
+    <script src="{% static 'adminpage/js/font_370252_4ceipsap79c.js' %}"></script>
+    <script type="text/javascript" src="{% static 'adminpage/js/showmodal.js' %}"></script>
+    <script type="text/javascript">
+        /*立个flag*/
+        var flag = true;
+        var verificationCodeInput = $('#weixin-check-modal input');
+
+        function Modal(options) {
+            var defaultOptions = {
+                visible: false,
+                selector: '.wl-modal-bg',
+                maskClosable: true,
+            };
+
+            this.options = $.extend({}, defaultOptions, options);
+            this.modal = $(this.options.selector);
+
+            this._init();
+        }
+
+        Modal.prototype._init = function() {
+            if(this.options.maskClosable) {
+                var _this = this;
+                // this.modal.on('click', function(e) {
+                //     if($(e.target).is(_this.modal)) {
+                //         _this.setVisible(false);
+                //     }
+                // });
+            }
+
+            this.setVisible(this.options.visible);
+        }
+
+        Modal.prototype.setVisible = function(visible, callback) {
+            this.options.visible = visible;
+            if(visible) {
+                this.modal.css('display', 'block');
+            } else {
+                verificationCodeInput.val('');
+                this.modal.css('display', 'none');
+            }
+            if(callback) {
+                callback();
+            }
+        }
+
+        var weixinBindingModal = new Modal({selector: '#weixin-binding-modal'});
+        var weixinCheckModal = new Modal({selector: '#weixin-check-modal'});
+        var weixinFollowModal = new Modal({selector: '#weixin-follow-modal'});
+        var qrCodeModal = new Modal({selector: '#qr-code'});
+
+
+      //  $('input').placeholder();
+      // 处理经过js文件要做到的跳转不了问题
+      var bind_url = "/home/phone/bindPhone.html";
+      var rebind_url = "/home/phone/rebindPhone.html";
+
+      var freshManModal = new Modal({
+          selector: '#fresh-man-modal',
+          maskClosable: true,
+      });
+
+      var language = document.getElementById("languageStatus");
+
+      var username = document.getElementById("username");
+      var casPassword = document.getElementById("casPassword");
+
+      var sureClose = document.getElementById("sureClose");
+
+      var alertModal = document.getElementById("alertModal");
+      var alertModalT = document.getElementById("alertModalT");
+      var alertModalS = document.getElementById("alertModalS");
+      var alertModalContent = document.getElementById("alertModalContent");
+      var remarkTextSpan = document.getElementById("remarkTextSpan");
+      var remarkTextMarquee = document.getElementById("remarkTextMarquee");
+
+//      var en = document.getElementById("en");
+//      var ch = document.getElementById("ch");
+      // 保存提示语的变量
+      var remarkText_cn = "请输入账号密码                                           ";
+      remarkTextSpan.innerHTML = remarkText_cn;
+      remarkTextMarquee.innerHTML = remarkText_cn;
+      // 判断长度是否超出，超出则滚动显示
+      if (remarkTextSpan.innerHTML.length>22) {
+        remarkTextSpan.style.display= 'none';
+        remarkTextMarquee.style.display = 'inline-block';
+      }
+      // iconhelp hover的时候改变颜色
+      var requireHover = document.getElementById("requireHover");
+      var require = document.getElementById("require");
+      $("#require").mouseover(function(){
+        requireHover.style.display = 'inline';
+        require.style.display = 'none';
+      });
+      $("#requireHover").mouseout(function(){
+        requireHover.style.display = 'none';
+        require.style.display = 'inline';
+      });
+      // 设置languageIndex处理选择中英切换后再换页，语言保持
+      var index=(document.cookie.split(";")[0].split('=')[1] !== '1' && document.cookie.split(";")[0].split('=')[1] !== '0') ? 0 : parseInt(document.cookie.split(";")[0].split('=')[1]);
+//      document.cookie = "languageIndex="+index;
+      language.options[index].defaultSelected = true;
+      changeLanguage();
+      language.onclick = function(){
+        index=language.selectedIndex;
+        changeLanguage();
+      };
+      // 显示学生模态框
+      function showAlertModalS() {
+          alertModalS.style.display = 'block';
+      }
+      // 显示教师模态框
+      function showAlertModalT() {
+          alertModalT.style.display = 'block';
+      }
+
+      // 关闭模态框
+      $('.closeIcon').click(function () {
+          alertModal.style.display = 'none';
+      });
+      $('.closeIconS').click(function () {
+          alertModalS.style.display = 'none';
+      });
+      $('.closeIconT').click(function () {
+          alertModalT.style.display = 'none';
+          if (flag != true) {
+              window.location.href = flag;
+          }
+      });
+      $('#alertModalSureBindTLast').click(function () {
+          alertModalT.style.display = 'none';
+          if (flag != true) {
+              window.location.href = flag;
+          }
+      });
+      sureClose.onclick = function(){
+        alertModal.style.display = 'none';
+      };
+      {# // 按enter触发点击按钮事件#}
+      {#$(function () {#}
+      {#  document.onkeydown = function (event) {#}
+      {#    var e = event || window.event || arguments.callee.caller.arguments[0];#}
+      {#    if (e && e.keyCode === 13) {#}
+      {#      submitDo();#}
+      {#    }#}
+      {#  };#}
+      {#    });#}
+
+    </script>
+    <script>
+        var bind_url = "/home/phone/bindPhone.html";
+        var rebind_url = "/home/phone/rebindPhone.html";
+
+        var token = "43d9e1333e31130e00efd6d1173866ad";
+        var verificationBtn = $('#weixin-check-modal .wl-btn-primary');
+        verificationCodeInput.on('keyup', function(e) {
+            if(verificationCodeInput.val()) {
+                verificationBtn.removeAttr('disabled');
+            } else {
+                verificationBtn.attr('disabled', true);
+            }
+        })
+        function submitDo() {
+            var username_val = username.value;
+            if (username_val === '') {
+              alertModalContent.innerHTML = $.chaLang(index, "errorInfoUsername");
+              alertModal.style.display = "block";
+              return false;
+            }
+            var password_val = casPassword.value;
+            if (password_val === '') {
+              alertModalContent.innerHTML = $.chaLang(index, "errorInfoPassword");
+              alertModal.style.display = "block";
+              return false;
+            }
+
+
+        }
+        noVisitor.onclick=function() {
+                showMessage("在新生流程开放期间，访客登录入口暂时关闭，若造成不便，望见谅。", "noVisitor")
+        }
+    </script>
+
+
+</body>
+</html>

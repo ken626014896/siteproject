@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load staticfiles %}
+{% load homepage_tag %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>公众号信息聚合</title>
+<meta name="others" content="页面生成时间 2018-10-27 16:24:51" />
+<link href="{% static 'homepage/css/index_style.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'homepage/css/pic_style.css' %}" rel="stylesheet" type="text/css" />
+
+<link href="{% static 'homepage/css/base.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/index.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/m.css' %}" rel="stylesheet">
+<link href="{% static 'homepage/css/shutter.css' %}" rel="stylesheet">
+
+<script language="javascript" type="text/javascript" src="{% static 'homepage/js/jquery.1.4.2-min.js' %}"></script>
+<script type="text/javascript" src="{% static 'homepage/js/jcarousellite.js' %}"></script>
+<script type="text/javascript" src="{% static 'homepage/js/easing.js' %}"></script>
+<script type="text/javascript" src="{% static 'homepage/js/bigpicroll.js' %}"></script>
+<script language="javascript" type="text/javascript" src="{% static 'homepage/js/js.js' %}"></script>
+<script language="javascript" type="text/javascript" src="{% static 'homepage/js/floatAdv.js' %}"></script>
+
+</head>
+
+<body >
+
+<DIV id="img" class="div_float_ad" style="z-index:10000;">
+
+<!--取ucapCMS的图片-->
+
+
+  							<!--取ucapCMS的图片-->
+<!-- 此处放关闭功能 -->
+<div align="right" style="margin: 2px; padding: 2px; top: -20px; right: 0px; position: absolute; z-index: 2000;"><a style="font-size: 11px; text-decoration: none;" href="#" onclick="hidfloatad()">关闭</a></div>
+<script language="JavaScript">
+<!--
+	//关闻漂浮图片
+	function hidfloatad()
+	{
+		 document.getElementById("img").style.display="none";
+	}
+//-->
+</script>
+{% get_newest as newest_list %}
+{% for newest in newest_list %}
+<!-- 此处插入图片 --><a target="_blank" href="{{ newest.get_absolute_url }}">
+    <img title="{{ newest.title }}" alt="{{ newest.titile }}"   width="100px" border="0" src='/static/homepage/images/contentImg/{{ newest.img_url }} '></a>
+
+{% empty %}
+
+{% endfor %}
+
+
+
+</DIV>
+<SCRIPT language=JavaScript>
+<!--
+	//调用漂浮函数
+   var ad1=new AdMove("img");
+       ad1.Run();
+//-->
+
+
+
+
+</SCRIPT>
+
+<div >
+
+{#    <iframe id="head" name="head" title="网站头部" width="100%" height="100%" src="index_top.shtml" scrolling="no" frameborder="0" allowtransparency="true"></iframe>#}
+<header>
+  <div class="tophead">
+    <div class="logo"><a href="{% url  "test" %}">推送与更新</a></div>
+    <div   id="mnav">
+      <h2><span class="navicon"></span></h2>
+      <ul>
+        <li><a href="{% url  "test" %}">网站首页</a></li>
+{#        <li><a href="about.html">类别</a></li>#}
+
+
+
+        <li><a href="share.html">关于我</a></li>
+
+      </ul>
+    </div>
+    <nav class="topnav" id="topnav">
+      <ul>
+        <li><a href="{% url  "test" %}">网站首页</a></li>
+{#        <li><a href="about.html">类别</a></li>#}
+
+        <li><a href="share.html">关于我</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+</div>
+
+
+
+<div class="homearea"  >
+
+<div class="shutter"  style="margin-top: 0;margin-bottom: 0">
+<div class="shutter-img">
+      {% get_scroll as scroll_list %}
+
+      {% for post in scroll_list %}
+       <a href="{{ post.get_absolute_url }}" data-shutter-title={{ post.title }}><img src="/static/homepage/images/contentImg/{{ post.img_url }}" alt="{{ post.title }}"></a>
+
+      {% empty %}
+      <div class="no-post">暂时还没有发布的文章！</div>
+      {% endfor %}
+</div>
+<ul class="shutter-btn">
+  <li class="prev"></li>
+  <li class="next"></li>
+</ul>
+<div class="shutter-desc">
+  <p></p>
+</div>
+</div>
+
+
+
+
+	<div class="homepage">
+
+
+
+      <div class="spacing01"></div>
+        <br/>
+        <div class="pagemain">
+        	<div class="fl pagediv">
+            	<div class="tit_box">
+                	<div class="fl"></div>
+                    <div class="fl tit_div"><span>科技</span></div>
+                    <div class="fr tit_more"><span class="agray"><a href="{% url  'technology' %}" target="_blank">更多>></a></span></div>
+                </div>
+                <div class="list_div">
+                	<ul>
+
+                       {% for technology in technology_list  %}
+                           <li><a href="{{ technology.get_absolute_url }}" target="_blank" title='{{ technology.title }}'  >{{ technology.title }}</a></li>
+                        {% empty %}
+                         <div class="no-post">暂时还没有发布的文章！</div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="fl pagediv ml12">
+            	<div class="tit_box">
+                	<div class="fl"></div>
+                    <div class="fl tit_div"><span>养老</span></div>
+                    <div class="fr tit_more"><span class="agray"><a href="{% url  'pension' %}" target="_blank">更多>></a></span></div>
+                </div>
+                <div class="list_div">
+                	<ul>
+                          {% for pension in pension_list  %}
+                           <li><a href="{{ pension.get_absolute_url }}" target="_blank" title='{{ pension.title }}'  >{{ pension.title }}</a></li>
+                        {% empty %}
+                         <div class="no-post">暂时还没有发布的文章！</div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="fr pagediv">
+            	<div class="tit_box">
+                	<div class="fl"></div>
+                    <div class="fl tit_div"><span>娱乐</span></div>
+                    <div class="fr tit_more"><span class="agray"><a href="{% url  'entertainment' %}" target="_blank">更多>></a></span></div>
+                </div>
+                <div class="list_div">
+                	<ul>
+                          {% for entertainment in entertainment_list  %}
+                           <li><a href="{{ entertainment.get_absolute_url }}" target="_blank" title='{{ entertainment.title }}'  >{{ entertainment.title }}</a></li>
+                        {% empty %}
+                         <div class="no-post">暂时还没有发布的文章！</div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="cl"></div>
+            <div class="spacing03"></div>
+        </div>
+        <div class="pagemain">
+        	<div class="fl pagediv">
+            	<div class="tit_box">
+                	<div class="fl"></div>
+                    <div class="fl tit_div"><span>学习</span></div>
+                    <div class="fr tit_more"><span class="agray"><a href="{% url  'study' %}" target="_blank">更多>></a></span></div>
+                </div>
+                <div class="list_div">
+                	<ul>
+
+                       {% for study in study_list  %}
+                           <li><a href="{{ study.get_absolute_url }}" target="_blank" title='{{ study.title }}'  >{{ study.title }}</a></li>
+                        {% empty %}
+                         <div class="no-post">暂时还没有发布的文章！</div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="fl pagediv ml12">
+            	<div class="tit_box">
+                	<div class="fl"></div>
+                    <div class="fl tit_div"><span>军事</span></div>
+                    <div class="fr tit_more"><span class="agray"><a href="{% url  'military' %}" target="_blank">更多>></a></span></div>
+                </div>
+                <div class="list_div">
+                	<ul>
+
+
+{#                        <li><a href="/dgut/xsgg/201810/18816017316d4f53a7a08631aaf0a9b3.shtml" target="_blank" title='告会及论坛安排表'  >2018年粤港澳大湾区院士峰会暨第四届广东院士高...</a></li>#}
+
+                        {% for military in military_list  %}
+                           <li><a href="{{ military.get_absolute_url }}" target="_blank" title='{{ military.title }}'  >{{ military.title }}</a></li>
+                        {% empty %}
+                         <div class="no-post">暂时还没有发布的文章！</div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="fr pagediv">
+            	<div class="tit_box">
+                	<div class="fl"></div>
+                    <div class="fl tit_div"><span>待定</span></div>
+                    <div class="fr tit_more"><span class="agray"><a href="/dgut/gjdt/index_list.shtml" target="_blank">更多>></a></span></div>
+                </div>
+                <div class="list_div">
+                	<ul>
+
+                        {% for military in military_list  %}
+                           <li><a href="{{ military.get_absolute_url }}" target="_blank" title='{{ military.title }}'  >{{ military.title }}</a></li>
+                        {% empty %}
+                         <div class="no-post">暂时还没有发布的文章！</div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="cl"></div>
+            <div class="spacing01"></div>
+        </div>
+
+        <div class="spacing02"></div>
+        <div class="indexlink">
+        	<div class="link_tab_div">
+            	<div class="fl"><img src="/dgut/xhtml/images/Tit_bg_19.jpg" alt="" /></div>
+                <div class="fl link_tab_menu" id="menu1">
+                	<ul>
+                    	<li  class="hover">标签云</li>
+
+                    </ul>
+                </div>
+                <div class="li_search">
+
+
+                    	<form action="search/" method="post" name="searchform" id="searchform">{% csrf_token %}
+                            <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+                            <input name="show" value="title" type="hidden">
+                            <input name="tempid" value="1" type="hidden">
+                            <input name="tbname" value="news" type="hidden">
+                            <input name="Submit" class="input_submit" value="搜索" type="submit">
+                        </form>
+
+                </div>
+            </div>
+           <div class="cloud">
+
+        {% get_sort as sort_list %}
+
+      <ul>
+{#        <a href="/">{{ sort.sort }}</a>#}
+{#              <a href="/">陌上花开</a> <a href="/">校园生活</a> <a href="/">html5</a> <a href="/">SumSung</a> <a href="/">青春</a> <a href="/">温暖</a> <a href="/">阳光</a> <a href="/">三星</a><a href="/">索尼</a> <a href="/">华维荣耀</a> <a href="/">三星</a> <a href="/">索尼</a>#}
+            {% for sort in sort_list %}
+                <a href="{{ sort.get_sort_url}}">{{ sort.sort }}  </a>
+
+            {% empty %}
+              <div class="no-post">暂时还没有标签！</div>
+            {% endfor %}
+      </ul>
+
+
+    </div>
+        </div>
+        <div class="spacing02"></div>
+
+
+  <div class="indexlink">
+        	<div class="link_tab_div">
+            	<div class="fl"><img src="/dgut/xhtml/images/Tit_bg_19.jpg" alt="" /></div>
+                <div class="fl link_tab_menu" id="menu1">
+                	<ul>
+
+                        <li class="hover" >友情链接</li>
+                    </ul>
+                </div>
+
+            </div>
+           <div class="links">
+
+      <ul>
+        <li><a href="https://weibo.com/1913281592/profile?rightmod=1&wvr=6&mod=personinfo" title="个人博客">个人博客</a></li>
+          <li><a href="https://github.com/ken626014896" title="个人博客">github</a></li>
+      </ul>
+    </div>
+        </div>
+
+
+
+        <div class="spacing02"></div>
+	</div>
+
+</div>
+<div class="blank"></div>
+<footer>
+    <p>Create by <a href="{% url 'manage' %}">xuzhaolong</a> <a href="{% url 'manage' %}"></a></p>
+</footer>
+
+<script src="{% static 'homepage/js/jquery-1.7.1.min.js' %}"></script>
+<script src="{% static 'homepage/js/velocity.js' %}"></script>
+<script src="{% static 'homepage/js/shutter.js' %}"></script>
+<script>
+//$(".poster-main").Carousel("init");
+
+$(function () {
+  $('.shutter').shutter({
+	shutterW: 1000, // 容器宽度
+	shutterH: 358, // 容器高度
+	isAutoPlay: true, // 是否自动播放
+	playInterval: 3000, // 自动播放时间
+	curDisplay: 3, // 当前显示页
+	fullPage: false // 是否全屏展示
+  });
+});
+
+</script>
+
+
+{#<style type="text/css">#}
+{#/*<![CDATA[*/#}
+{#li {#}
+{#width:280px;#}
+{#white-space:nowrap;#}
+{#text-overflow:ellipsis;#}
+{#-o-text-overflow:ellipsis;#}
+{#overflow: hidden;#}
+{#}#}
+{#/*]]>*/#}
+{#</style>#}
+</body>
+</html>
