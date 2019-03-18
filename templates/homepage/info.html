@@ -172,13 +172,13 @@ window.onload = function ()
       </ul>
     </div>
    <div class="cloud">
-      <h2 class="hometitle">标签云</h2>
+      <h2   class="hometitle">标签云</h2>
         {% get_sort as sort_list %}
 
-     <ul>
+     <ul style="padding-top: 10px">
 
             {% for sort in sort_list %}
-                <a href="{{ sort.get_sort_url}}">{{ sort.sort }}</a>
+                <a  href="{{ sort.get_sort_url}}">{{ sort.sort }}</a>
             {% empty %}
               <div class="no-post">暂时还没有标签！</div>
             {% endfor %}
@@ -193,7 +193,7 @@ window.onload = function ()
 <footer>
     <p>Create by <a href="/">xuzhaolong</a> <a href="/"></a></p>
 </footer>
-<script src="js/nav.js"></script> 
+
 <script type="text/javascript">
 jQuery.noConflict();
 jQuery(function() { 

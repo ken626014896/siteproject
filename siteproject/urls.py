@@ -51,8 +51,8 @@ urlpatterns = [
 
 
     #主页
-    path('test/',views.index ,name="homepage2"),
-    path('test2/',views.index2 ,name="homepage"),
+    # path('test/',views.index ,name="homepage2"),
+    # path('test2/',views.index2 ,name="homepage"),
     path('', views.index,name="test"),
     #查询
     path('search/', views.searchSomething ,name="search"),

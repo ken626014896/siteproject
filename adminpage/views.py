@@ -32,6 +32,7 @@ def manage(request):
             if user.password == password:
                request.session['account'] = user.account
                request.session['is_login'] = True
+               request.session.set_expiry(0) #关闭浏览器是seesion失效
                return redirect('/function/')
             else:
                message = "密码不正确！"

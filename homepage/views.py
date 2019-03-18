@@ -16,13 +16,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 #主页
+@cache_page(60*5)
 def index(request):
     # x=LoadData()
     # x.DoneIt()
     #
     post_list= Post.objects.all().order_by('-pk')
     sort_list=Category.objects.all()
-    
+
     return render(request, 'homepage/index.html', {"post_list": post_list,
                                                    'sort_list':sort_list})
 def index2(request):
@@ -69,12 +70,6 @@ def showlist(request,sort):
     # x = LoadData()
     # x.DoneIt()
     # sort=get_object_or_404(Post,sort='养老'
-    path_str=request.get_full_path()
-    path_list=path_str.split('/')
-    print("请求的url是:",request.get_full_path())
-
-
-    # sort=path_list[1]
 
     sort_EN=sort
     sort_objects=Category.objects.get(sort_EN=sort_EN)
