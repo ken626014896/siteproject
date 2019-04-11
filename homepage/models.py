@@ -23,8 +23,8 @@ class Post(models.Model):
     img_url_list = models.CharField(max_length=2500,null=True)
     context_list = models.CharField(max_length=2500,null=True)
     # 待定数据
-    temp1 = models.CharField(max_length=250,null=True)
-    temp2 = models.CharField(max_length=250,null=True)
+    temp1 = models.TextField(max_length=5000,null=True)
+    temp2 = models.TextField(max_length=5000,null=True)
     temp3 = models.CharField(max_length=250,null=True)
 
     #用于下载图片

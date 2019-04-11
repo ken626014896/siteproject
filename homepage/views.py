@@ -18,10 +18,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #主页
 @cache_page(60*5)
 def index(request):
-    # x=LoadData()
-    # x.DoneIt()
-    #
-    post_list= Post.objects.all().order_by('-pk')
+
+    post_list= Post.objects.all().order_by('-pk').defer('img_url','temp1','temp2','come_from','publish_time')
     sort_list=Category.objects.all()
 
     return render(request, 'homepage/index.html', {"post_list": post_list,

@@ -17,7 +17,7 @@ def get_sort():
 @register.simple_tag
 def get_recommen():
 
-    return Post.objects.all()[:3]
+    return Post.objects.all().order_by('-pk')[:3]
 
 
 
@@ -25,7 +25,7 @@ def get_recommen():
 @register.simple_tag
 def get_share():
     print('开始缓存模板tag')
-    return Category.objects.all()[0:3]
+    return Category.objects.all().order_by('-pk')[0:3]
 
 #获得要滚屏的推送
 # @register.simple_tag
